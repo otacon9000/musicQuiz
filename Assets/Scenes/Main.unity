@@ -4127,7 +4127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2026255329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4137,14 +4137,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2026255328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f84dbd9837140d5879db9980913267, type: 3}
+  m_Script: {fileID: 11500000, guid: 79e477f135e574808aa8a867d197d74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JSONdocument: {fileID: 4900000, guid: 21f1a300b820f485391932703941d395, type: 3}
-  myPlaylist:
-    id: 0
-    playlist: []
-  fileRead: 
+  _playList: []
 --- !u!4 &2026255330
 Transform:
   m_ObjectHideFlags: 0
