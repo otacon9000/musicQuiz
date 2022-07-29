@@ -3608,6 +3608,7 @@ GameObject:
   - component: {fileID: 1834128800}
   - component: {fileID: 1834128802}
   - component: {fileID: 1834128801}
+  - component: {fileID: 1834128803}
   m_Layer: 5
   m_Name: Welcome_panel
   m_TagString: Untagged
@@ -3677,6 +3678,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834128799}
   m_CullTransparentMesh: 1
+--- !u!114 &1834128803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834128799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85aae31753a5042e08186ffc43e3d4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playlistName:
+  - {fileID: 1728188486}
+  - {fileID: 413601993}
+  - {fileID: 150764714}
 --- !u!1 &1835081541
 GameObject:
   m_ObjectHideFlags: 0
