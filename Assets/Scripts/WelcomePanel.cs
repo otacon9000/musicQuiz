@@ -17,14 +17,9 @@ public class WelcomePanel : MonoBehaviour, IPanel
             _playlistName[i].text = JsonImporter.Instance.GetPlaylistName(i);
         }
     }
-
+    
     private void Start()
     {
         ProcessInfo();
-    }
-
-    public void UpdatePlayListSelected()
-    {
-        GameManager.Instance.playlistSelected = 0;
     }
 }
