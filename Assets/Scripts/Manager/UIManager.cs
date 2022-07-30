@@ -22,8 +22,12 @@ public class UIManager : MonoSingleton<UIManager>
     private int _questionCounter = 0;
     [SerializeField] 
     private Question _currentQuestion;
-    
-    
+
+    [Header("Result")] 
+    public Sprite correctSprite;
+    public Sprite wrongSprite;
+    [SerializeField]
+    private List<Song> _songsList = new List<Song>();
     public void SetCurrentPlaylistName(int playlistIndex)
     {
         _currentPlaylistName = JsonImporter.Instance.GetPlaylistName(playlistIndex);
@@ -31,9 +35,8 @@ public class UIManager : MonoSingleton<UIManager>
         
         _welcomePanel.SetActive(false);
         SetCurrentQuestion();
+        _songsList.Add(_currentQuestion.song);
         _quizPanel.SetActive(true);
-        //_questionPanel.SetActive(true);
-        
     }
 
     public void SetCurrentQuestion()
@@ -60,6 +63,7 @@ public class UIManager : MonoSingleton<UIManager>
         {
             //go to next question or update field
             SetCurrentQuestion();
+            _songsList.Add(_currentQuestion.song);
             _questionPanel.SetActive(false);
             _questionPanel.SetActive(true);
         }
@@ -82,6 +86,21 @@ public class UIManager : MonoSingleton<UIManager>
         }
         //go to the next question
         UpdateQuestionCounter();
+    }
+
+    public List<Song> GetSongListResult()
+    {
+        return _songsList;
+    }
+
+
+
+    public void RestartGame()
+    {
+        _songsList.Clear();
+        GameManager.Instance.ResetGame();
+        _resultPanel.SetActive(false);
+        _welcomePanel.SetActive(true);
     }
 
 }
