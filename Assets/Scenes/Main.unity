@@ -1035,7 +1035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &240127980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1424,10 +1424,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 240127979}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 579463050}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CheckAnswer
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1435,18 +1435,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1034089640}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &270570118
 MonoBehaviour:
@@ -2191,9 +2179,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2054951343}
-        m_TargetAssemblyTypeName: QuestionPanel, Assembly-CSharp
-        m_MethodName: TestButtonResult
+      - m_Target: {fileID: 579463050}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CheckAnswer
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2477,7 +2465,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 497262600}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 579463050}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetCurrentPlaylistName
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &497262600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2598,7 +2598,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 500530478}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 579463050}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetCurrentPlaylistName
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &500530478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2948,6 +2960,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f82bf79428d54910aa417c6739de829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _welcomePanel: {fileID: 1834128799}
+  _quizPanel: {fileID: 240127979}
+  _resultPanel: {fileID: 1034089640}
+  _questionPanel: {fileID: 2054951341}
+  _currentPlaylistName: 
+  _questionCounter: 0
+  _currentQuestion:
+    id: 
+    answerIndex: 0
+    choices: []
+    song:
+      id: 
+      title: 
+      artist: 
+      picture: 
+      sample: 
 --- !u!4 &579463051
 Transform:
   m_ObjectHideFlags: 0
@@ -3675,7 +3703,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 777355259}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 579463050}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CheckAnswer
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &777355259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4522,8 +4562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d545f3db9cc460bb67d94fa150a624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionCount: 0
-  playlistSelected: 2
 --- !u!4 &1223685252
 Transform:
   m_ObjectHideFlags: 0
@@ -6656,7 +6694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1834128800
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6817,7 +6855,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1835081544}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 579463050}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CheckAnswer
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1835081544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8181,17 +8231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6686c6860c1742239975d215e9aa788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _question:
-    id: 
-    answerIndex: 0
-    choices: []
-    song:
-      id: 
-      title: 
-      artist: 
-      picture: 
-      sample: 
-  _index: 0
   answerText:
   - {fileID: 5540506}
   - {fileID: 1631498404}
@@ -8714,10 +8753,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1834128799}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 579463050}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetCurrentPlaylistName
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8725,18 +8764,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 240127979}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2130302908
 MonoBehaviour:
