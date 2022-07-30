@@ -54,6 +54,7 @@ public class UIManager : MonoSingleton<UIManager>
         if (_questionCounter > 4)
         {
             //go to result
+            AudioManager.Instance.StopAudio();
             _quizPanel.SetActive(false);
             _resultPanel.SetActive(true);
             //set question counter to 0? 
@@ -63,6 +64,7 @@ public class UIManager : MonoSingleton<UIManager>
         {
             //go to next question or update field
             SetCurrentQuestion();
+            AudioManager.Instance.StopAudio();
             _songsList.Add(_currentQuestion.song);
             _questionPanel.SetActive(false);
             _questionPanel.SetActive(true);

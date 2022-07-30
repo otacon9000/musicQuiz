@@ -33,8 +33,8 @@ public class AudioManager : MonoSingleton<AudioManager>
             {
                 _myClip = DownloadHandlerAudioClip.GetContent(www);
                 _audioSource.clip = _myClip;
-                // _audioSource.Play();
-                // Debug.Log("Audio is playing.");
+                _audioSource.Play();
+                Debug.Log("Audio is playing.");
             }
         }
     }
@@ -42,15 +42,9 @@ public class AudioManager : MonoSingleton<AudioManager>
     public void PlayAudio(){
         _audioSource.Play();
     }
-    //  
-    // public void pauseAudio(){
-    //     audioSource.Pause();
-    // }
-    //  
+    public void StopAudio()
+    {
+        _audioSource.Stop();
+    }
 
-    //  
-    // public void stopAudio(){
-    //     audioSource.Stop();
-    //  
-    // }
 }
