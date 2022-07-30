@@ -11,15 +11,17 @@ public class QuestionPanel : MonoBehaviour, IPanel
     public void ProcessInfo()
     {
         _question = UIManager.Instance.GetCurrentQuestion();
+        AudioManager.Instance.DowloadAudioClip();
         for (int i = 0; i < _question.choices.Length; i++)
         {
             answerText[i].text = _question.choices[i].artist +"\n" +_question.choices[i].title;
         }
     }
-    //non sará fatto nello start ma da un onclick event 
+    
     private void OnEnable()
     {
         ProcessInfo();
+        AudioManager.Instance.PlayAudio();
     }
     
    

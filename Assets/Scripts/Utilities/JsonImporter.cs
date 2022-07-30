@@ -50,7 +50,6 @@ public class JsonImporter : MonoSingleton<JsonImporter>
 
     public Question GetQuestion(int playlisteSelected, int questionNumber)
     {
-        //_playList[0].questions
         return _playList[playlisteSelected].questions[questionNumber];
     }
 }
