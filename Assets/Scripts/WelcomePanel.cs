@@ -22,4 +22,9 @@ public class WelcomePanel : MonoBehaviour, IPanel
     {
         ProcessInfo();
     }
+
+    public void UpdatePlayListSelected()
+    {
+        GameManager.Instance.playlistSelected = 0;
+    }
 }

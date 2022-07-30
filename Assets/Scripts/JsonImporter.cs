@@ -7,7 +7,6 @@ public class JsonImporter : MonoSingleton<JsonImporter>
     [SerializeField]
     private List<PlayList> _playList = default;
 
-
     private const string DATABASE_NAME = "coding-test-frontend-unity";
 
     private void Awake()
@@ -47,5 +46,11 @@ public class JsonImporter : MonoSingleton<JsonImporter>
     public string GetPlaylistName(int value)
     {
         return _playList[value].playlist;
+    }
+
+    public Question GetQuestion(int playlisteSelected, int questionNumber)
+    {
+        //_playList[0].questions
+        return _playList[playlisteSelected].questions[questionNumber];
     }
 }
