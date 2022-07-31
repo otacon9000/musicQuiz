@@ -2368,6 +2368,12 @@ MonoBehaviour:
   - {fileID: 1124989322}
   - {fileID: 1131337763}
   - {fileID: 1968716863}
+  _songAlbum:
+  - {fileID: 1245396182}
+  - {fileID: 179206381}
+  - {fileID: 990593811}
+  - {fileID: 1395114252}
+  - {fileID: 1153714063}
   finalResultSprite:
   - {fileID: 1401908568}
   - {fileID: 973094670}
