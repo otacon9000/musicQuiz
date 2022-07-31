@@ -1,17 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
- 
+
 public class AudioManager : MonoSingleton<AudioManager>
 {
     public AudioClip correctButtonSFX;
     public AudioClip wrongButtonSFX;
-    private AudioSource _audioSource;
+
     [SerializeField]
     private AudioClip _myClip;
-    
-    void Awake()
+    private AudioSource _audioSource;
+
+    private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
     }
@@ -20,23 +20,23 @@ public class AudioManager : MonoSingleton<AudioManager>
     {
         StartCoroutine(GetAudioClipRoutine());
     }
-    
+
     public void StopAudio()
     {
         _audioSource.Stop();
     }
-    
+
     public void PlayAnswerSFX(bool result)
     {
         StartCoroutine(PlayAnswerSound(result));
     }
-    
-    IEnumerator GetAudioClipRoutine()
+
+    private IEnumerator GetAudioClipRoutine()
     {
-        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(UIManager.Instance.GetCurrentQuestion().song.sample, AudioType.WAV))
+        using (var www = UnityWebRequestMultimedia.GetAudioClip(UIManager.Instance.GetCurrentQuestion().song.sample, AudioType.WAV))
         {
             yield return www.SendWebRequest();
-            
+
             if (www.isNetworkError)
             {
                 Debug.Log(www.error);
@@ -50,21 +50,21 @@ public class AudioManager : MonoSingleton<AudioManager>
         }
     }
 
-    IEnumerator PlayAnswerSound(bool result)
-     {
-         if (result)
-         {
-             _audioSource.clip = correctButtonSFX;
-             _audioSource.Play();
-             yield return new WaitForSeconds(correctButtonSFX.length);
-             UIManager.Instance.UpdateQuestionCounter();
-         }
-         else
-         {
-             _audioSource.clip = wrongButtonSFX;
-             _audioSource.Play();
-             yield return new WaitForSeconds(wrongButtonSFX.length);
-             UIManager.Instance.UpdateQuestionCounter();
-         }
-     }
+    private IEnumerator PlayAnswerSound(bool result)
+    {
+        if (result)
+        {
+            _audioSource.clip = correctButtonSFX;
+            _audioSource.Play();
+            yield return new WaitForSeconds(correctButtonSFX.length);
+            UIManager.Instance.UpdateQuestionCounter();
+        }
+        else
+        {
+            _audioSource.clip = wrongButtonSFX;
+            _audioSource.Play();
+            yield return new WaitForSeconds(wrongButtonSFX.length);
+            UIManager.Instance.UpdateQuestionCounter();
+        }
+    }
 }

@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-public interface IPanel 
+﻿public interface IPanel
 {
-     void ProcessInfo();
+    void ProcessInfo();
 }

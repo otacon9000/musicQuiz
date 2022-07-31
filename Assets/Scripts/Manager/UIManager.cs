@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,18 +11,16 @@ public class UIManager : MonoSingleton<UIManager>
     private GameObject _quizPanel;
     [SerializeField] 
     private GameObject _resultPanel;
-    
+
     [Header("Question Panel")] 
-    [SerializeField] 
-    private GameObject _questionPanel;
     [SerializeField]
+    private GameObject _questionPanel;
+    [SerializeField] 
     private string _currentPlaylistName;
-    private int _currentPlaylistIndex;
-    [SerializeField] [Range(0, 4)]
-    private int _questionCounter = 0;
+    [SerializeField] [Range(0, 4)] 
+    private int _questionCounter;
     [SerializeField] 
     private Question _currentQuestion;
-    public bool waitForResult = false;
     [SerializeField] 
     private Image[] _spriteButton;
     [SerializeField] 
@@ -32,18 +29,20 @@ public class UIManager : MonoSingleton<UIManager>
     private Sprite _correctSpriteButton;
     [SerializeField] 
     private Sprite _wrongSpriteButton;
-    
+
     [Header("Result")] 
     public Sprite correctAnswerCheckmark;
     public Sprite wrongAnswerCheckmark;
-    [SerializeField]
+
+    [SerializeField] 
     private List<Song> _songsList = new List<Song>();
-    
+    private int _currentPlaylistIndex;
+
     public void SetCurrentPlaylistName(int playlistIndex)
     {
         _currentPlaylistName = JsonImporter.Instance.GetPlaylistName(playlistIndex);
         _currentPlaylistIndex = playlistIndex;
-        
+
         _welcomePanel.SetActive(false);
         SetCurrentQuestion();
         _songsList.Add(_currentQuestion.song);
@@ -52,14 +51,15 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void SetCurrentQuestion()
     {
-        _currentQuestion = JsonImporter.Instance.GetQuestion(_currentPlaylistIndex,_questionCounter);
+        _currentQuestion = JsonImporter.Instance.GetQuestion(_currentPlaylistIndex, _questionCounter);
         GameManager.IsInputEnabled = true;
     }
+
     public Question GetCurrentQuestion()
     {
         return _currentQuestion;
     }
-    
+
     public void UpdateQuestionCounter()
     {
         _questionCounter++;
@@ -82,27 +82,24 @@ public class UIManager : MonoSingleton<UIManager>
             _questionPanel.SetActive(true);
         }
     }
-    
+
     public void CheckAnswer(int buttonIndex)
     {
         if (GameManager.IsInputEnabled)
         {
             if (buttonIndex != _currentQuestion.answerIndex)
             {
-                //bad feedback
-                //Debug.Log("wrong");
                 _spriteButton[buttonIndex].sprite = _wrongSpriteButton;
                 AudioManager.Instance.PlayAnswerSFX(false);
                 GameManager.Instance.AddResult(_questionCounter, false);
             }
             else
             {
-                //good feedback
-                //Debug.Log("correct");
-                _spriteButton[buttonIndex].sprite =_correctSpriteButton ;
+                _spriteButton[buttonIndex].sprite = _correctSpriteButton;
                 AudioManager.Instance.PlayAnswerSFX(true);
                 GameManager.Instance.AddResult(_questionCounter, true);
             }
+
             GameManager.IsInputEnabled = false;
         }
     }
@@ -114,12 +111,9 @@ public class UIManager : MonoSingleton<UIManager>
 
     private void SetBaseSpriteButton()
     {
-        foreach (var n in _spriteButton)
-        {
-            n.sprite = _baseSpriteButton;
-        }
+        foreach (var n in _spriteButton) n.sprite = _baseSpriteButton;
     }
-    
+
     public void RestartGame()
     {
         _songsList.Clear();
@@ -127,5 +121,4 @@ public class UIManager : MonoSingleton<UIManager>
         _resultPanel.SetActive(false);
         _welcomePanel.SetActive(true);
     }
-    
 }

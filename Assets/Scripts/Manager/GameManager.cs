@@ -1,20 +1,21 @@
+using System.Collections.Generic;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    private bool[] _result = new bool[5];
     public static bool IsInputEnabled = true;
+    private List<bool> _result = new List<bool>();
 
     public void ResetGame()
     {
-        _result.Initialize();
+        _result.Clear();
     }
 
     public void AddResult(int questionIndex, bool result)
     {
-        _result[questionIndex] = result;
+        _result.Add(result);
     }
-    
-    public bool[] GetResult()
+
+    public List<bool> GetResult()
     {
         return _result;
     }

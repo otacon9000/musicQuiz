@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+using System;
 
-[System.Serializable]
+[Serializable]
 public struct PlayList
 {
     public string id;
@@ -10,7 +8,7 @@ public struct PlayList
     public string playlist;
 }
 
-[System.Serializable]
+[Serializable]
 public struct Question
 {
     public string id;
@@ -18,14 +16,15 @@ public struct Question
     public Choice[] choices;
     public Song song;
 }
-[System.Serializable]
+
+[Serializable]
 public struct Choice
 {
     public string artist;
     public string title;
 }
 
-[System.Serializable]
+[Serializable]
 public struct Song
 {
     public string id;
@@ -34,5 +33,3 @@ public struct Song
     public string picture;
     public string sample;
 }
-
-
