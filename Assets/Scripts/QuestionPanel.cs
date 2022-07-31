@@ -21,8 +21,5 @@ public class QuestionPanel : MonoBehaviour, IPanel
     private void OnEnable()
     {
         ProcessInfo();
-        //AudioManager.Instance.PlayAudio();
     }
-    
-   
 }

@@ -26,22 +26,19 @@ public class UIManager : MonoSingleton<UIManager>
     public bool waitForResult = false;
     [SerializeField] 
     private Image[] _spriteButton;
-    // [SerializeField] 
-    // private Button[] _questionButton;
     [SerializeField] 
     private Sprite _baseSpriteButton;
     [SerializeField] 
     private Sprite _correctSpriteButton;
     [SerializeField] 
     private Sprite _wrongSpriteButton;
-
-
-
+    
     [Header("Result")] 
     public Sprite correctAnswerCheckmark;
     public Sprite wrongAnswerCheckmark;
     [SerializeField]
     private List<Song> _songsList = new List<Song>();
+    
     public void SetCurrentPlaylistName(int playlistIndex)
     {
         _currentPlaylistName = JsonImporter.Instance.GetPlaylistName(playlistIndex);
@@ -53,7 +50,7 @@ public class UIManager : MonoSingleton<UIManager>
         _quizPanel.SetActive(true);
     }
 
-    public void SetCurrentQuestion()
+    private void SetCurrentQuestion()
     {
         _currentQuestion = JsonImporter.Instance.GetQuestion(_currentPlaylistIndex,_questionCounter);
         GameManager.IsInputEnabled = true;
