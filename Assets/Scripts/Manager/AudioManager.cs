@@ -5,7 +5,9 @@ using UnityEngine.Networking;
  
 public class AudioManager : MonoSingleton<AudioManager>
 {
-     
+    public AudioClip buttonSFX;
+    public AudioClip correctButtonSFX;
+    public AudioClip wrongButtonSFX;
     private AudioSource _audioSource;
     [SerializeField]
     private AudioClip _myClip;
@@ -17,8 +19,41 @@ public class AudioManager : MonoSingleton<AudioManager>
     public void DowloadAudioClip()
     {
         StartCoroutine(GetAudioClip());
-        Debug.Log("Starting to download the audio...");
     }
+    
+     
+    public void PlayAudio(){
+        _audioSource.Play();
+    }
+    public void StopAudio()
+    {
+        _audioSource.Stop();
+    }
+
+    public void PlayButton()
+    {
+        _audioSource.clip = buttonSFX;
+        _audioSource.Play();
+    }  
+    // public void PlayButtonCorrect()
+    // {
+    //     _audioSource.clip = correctButtonSFX;
+    //     _audioSource.Play();
+    //     UIManager.Instance.UpdateQuestionCounter();
+    // }
+    // public void PlayButtonWrong()
+    // {
+    //     _audioSource.clip = wrongButtonSFX;
+    //     _audioSource.Play();
+    //     UIManager.Instance.UpdateQuestionCounter();
+    // }
+
+    public void PlayAnswerSFX(bool result)
+    {
+        StartCoroutine(PlayAnswerSound(result));
+    }
+    
+    
     IEnumerator GetAudioClip()
     {
         using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(UIManager.Instance.GetCurrentQuestion().song.sample, AudioType.WAV))
@@ -34,17 +69,28 @@ public class AudioManager : MonoSingleton<AudioManager>
                 _myClip = DownloadHandlerAudioClip.GetContent(www);
                 _audioSource.clip = _myClip;
                 _audioSource.Play();
-                Debug.Log("Audio is playing.");
             }
         }
     }
-     
-    public void PlayAudio(){
-        _audioSource.Play();
-    }
-    public void StopAudio()
-    {
-        _audioSource.Stop();
-    }
+
+    IEnumerator PlayAnswerSound(bool result)
+     {
+         if (result)
+         {
+             _audioSource.clip = correctButtonSFX;
+             _audioSource.Play();
+             yield return new WaitForSeconds(correctButtonSFX.length);
+             //UIManager.Instance.DisableButton(true);
+             UIManager.Instance.UpdateQuestionCounter();
+         }
+         else
+         {
+             _audioSource.clip = wrongButtonSFX;
+             _audioSource.Play();
+             yield return new WaitForSeconds(wrongButtonSFX.length);
+             //UIManager.Instance.DisableButton(true);
+             UIManager.Instance.UpdateQuestionCounter();
+         }
+     }
 
 }

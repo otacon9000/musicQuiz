@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -11,7 +12,7 @@ public class UIManager : MonoSingleton<UIManager>
     private GameObject _quizPanel;
     [SerializeField] 
     private GameObject _resultPanel;
-
+    
     [Header("Question Panel")] 
     [SerializeField] 
     private GameObject _questionPanel;
@@ -22,7 +23,10 @@ public class UIManager : MonoSingleton<UIManager>
     private int _questionCounter = 0;
     [SerializeField] 
     private Question _currentQuestion;
-
+    public bool waitForResult = false;
+    [SerializeField] 
+    private Button[] _questionButton;
+    
     [Header("Result")] 
     public Sprite correctSprite;
     public Sprite wrongSprite;
@@ -48,6 +52,7 @@ public class UIManager : MonoSingleton<UIManager>
         return _currentQuestion;
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public void UpdateQuestionCounter()
     {
         _questionCounter++;
@@ -67,27 +72,28 @@ public class UIManager : MonoSingleton<UIManager>
             AudioManager.Instance.StopAudio();
             _songsList.Add(_currentQuestion.song);
             _questionPanel.SetActive(false);
+           
             _questionPanel.SetActive(true);
+            //DisableButton(false);
         }
     }
     
-    //test to check with the correct answer
     public void CheckAnswer(int buttonIndex)
     {
         if (buttonIndex != _currentQuestion.answerIndex)
         {
             //bad feedback
-            Debug.Log("wrong");
+            //Debug.Log("wrong");
+            AudioManager.Instance.PlayAnswerSFX(false);
             GameManager.Instance.AddResult(_questionCounter, false);
         }
         else
         {
             //good feedback
-            Debug.Log("correct");
+            //Debug.Log("correct");
+            AudioManager.Instance.PlayAnswerSFX(true);
             GameManager.Instance.AddResult(_questionCounter, true);
         }
-        //go to the next question
-        UpdateQuestionCounter();
     }
 
     public List<Song> GetSongListResult()
@@ -95,7 +101,30 @@ public class UIManager : MonoSingleton<UIManager>
         return _songsList;
     }
 
-
+    // public void DisableButton(bool activate)
+    // {
+    //     for (int i = 0; i < _questionButton.Length; i++)
+    //     {
+    //         _questionButton[i].enabled = false;
+    //     }
+    //   
+    //     // if (activate)
+    //     // {
+    //     //     Debug.Log("disable button");
+    //     //     foreach (Button nButton in _questionButton)
+    //     //     {
+    //     //         nButton.enabled = false;
+    //     //     }
+    //     // }
+    //     // else
+    //     // {
+    //     //     Debug.Log("enable button");
+    //     //     foreach (Button nButton in _questionButton)
+    //     //     {
+    //     //         nButton.enabled = true;
+    //     //     }
+    //     // }
+    // }
 
     public void RestartGame()
     {
