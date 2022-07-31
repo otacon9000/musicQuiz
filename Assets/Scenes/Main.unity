@@ -1491,13 +1491,16 @@ MonoBehaviour:
       picture: 
       sample: 
   waitForResult: 0
-  _questionButton:
-  - {fileID: 270570117}
-  - {fileID: 472790539}
-  - {fileID: 1835081543}
-  - {fileID: 777355258}
-  correctSprite: {fileID: 21300000, guid: 734bbe5ffb750418dacdf198446f3712, type: 3}
-  wrongSprite: {fileID: 21300000, guid: 0a2e4ec1900794ad78657c3de383fdf2, type: 3}
+  _spriteButton:
+  - {fileID: 270570118}
+  - {fileID: 472790540}
+  - {fileID: 1835081544}
+  - {fileID: 777355259}
+  _baseSpriteButton: {fileID: 21300000, guid: 2723933519ef14376b8a1f5c58a3491b, type: 3}
+  _correctSpriteButton: {fileID: 21300000, guid: b5ab02b38a89c40ca9efeabfa35a077e, type: 3}
+  _wrongSpriteButton: {fileID: 21300000, guid: 14b228143367f4c84a829341bae4daea, type: 3}
+  correctAnswerCheckmark: {fileID: 21300000, guid: 734bbe5ffb750418dacdf198446f3712, type: 3}
+  wrongAnswerCheckmark: {fileID: 21300000, guid: 0a2e4ec1900794ad78657c3de383fdf2, type: 3}
   _songsList: []
 --- !u!4 &579463051
 Transform:

@@ -24,21 +24,19 @@ public class ResultPanel : MonoBehaviour, IPanel
             if ( result[i]== true)
             {
                 resultValue++;
-                finalResultSprite[i].sprite = UIManager.Instance.correctSprite;
+                finalResultSprite[i].sprite = UIManager.Instance.correctAnswerCheckmark;
             }
             else
             {
-                finalResultSprite[i].sprite = UIManager.Instance.wrongSprite;
+                finalResultSprite[i].sprite = UIManager.Instance.wrongAnswerCheckmark;
             }
         }
         _score.text = resultValue.ToString() + "/5";
-
         _songListRes = UIManager.Instance.GetSongListResult();
         for (int i = 0; i < _songListRes.Count; i++)
         {
             _songName[i].text = _songListRes[i].title;
         }
-
     }
 
     private void OnEnable()

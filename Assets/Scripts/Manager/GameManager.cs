@@ -6,10 +6,12 @@ public class GameManager : MonoSingleton<GameManager>
 {
     private int _playerScore = 0;
     private bool[] _result = new bool[5];
+    public static bool IsInputEnabled = true;
     
     public void UpdateScore()
     {
         _playerScore++;
+        
     }
 
     public void ResetGame()

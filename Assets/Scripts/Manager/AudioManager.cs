@@ -11,6 +11,7 @@ public class AudioManager : MonoSingleton<AudioManager>
     private AudioSource _audioSource;
     [SerializeField]
     private AudioClip _myClip;
+    
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -21,7 +22,6 @@ public class AudioManager : MonoSingleton<AudioManager>
         StartCoroutine(GetAudioClip());
     }
     
-     
     public void PlayAudio(){
         _audioSource.Play();
     }
@@ -34,25 +34,12 @@ public class AudioManager : MonoSingleton<AudioManager>
     {
         _audioSource.clip = buttonSFX;
         _audioSource.Play();
-    }  
-    // public void PlayButtonCorrect()
-    // {
-    //     _audioSource.clip = correctButtonSFX;
-    //     _audioSource.Play();
-    //     UIManager.Instance.UpdateQuestionCounter();
-    // }
-    // public void PlayButtonWrong()
-    // {
-    //     _audioSource.clip = wrongButtonSFX;
-    //     _audioSource.Play();
-    //     UIManager.Instance.UpdateQuestionCounter();
-    // }
+    }
 
     public void PlayAnswerSFX(bool result)
     {
         StartCoroutine(PlayAnswerSound(result));
     }
-    
     
     IEnumerator GetAudioClip()
     {
@@ -92,5 +79,4 @@ public class AudioManager : MonoSingleton<AudioManager>
              UIManager.Instance.UpdateQuestionCounter();
          }
      }
-
 }

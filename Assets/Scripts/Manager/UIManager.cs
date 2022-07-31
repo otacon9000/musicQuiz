@@ -25,11 +25,21 @@ public class UIManager : MonoSingleton<UIManager>
     private Question _currentQuestion;
     public bool waitForResult = false;
     [SerializeField] 
-    private Button[] _questionButton;
-    
+    private Image[] _spriteButton;
+    // [SerializeField] 
+    // private Button[] _questionButton;
+    [SerializeField] 
+    private Sprite _baseSpriteButton;
+    [SerializeField] 
+    private Sprite _correctSpriteButton;
+    [SerializeField] 
+    private Sprite _wrongSpriteButton;
+
+
+
     [Header("Result")] 
-    public Sprite correctSprite;
-    public Sprite wrongSprite;
+    public Sprite correctAnswerCheckmark;
+    public Sprite wrongAnswerCheckmark;
     [SerializeField]
     private List<Song> _songsList = new List<Song>();
     public void SetCurrentPlaylistName(int playlistIndex)
@@ -46,53 +56,57 @@ public class UIManager : MonoSingleton<UIManager>
     public void SetCurrentQuestion()
     {
         _currentQuestion = JsonImporter.Instance.GetQuestion(_currentPlaylistIndex,_questionCounter);
+        GameManager.IsInputEnabled = true;
     }
     public Question GetCurrentQuestion()
     {
         return _currentQuestion;
     }
-
-    // ReSharper disable Unity.PerformanceAnalysis
+    
     public void UpdateQuestionCounter()
     {
         _questionCounter++;
+        SetBaseSpriteButton();
         if (_questionCounter > 4)
         {
             //go to result
             AudioManager.Instance.StopAudio();
             _quizPanel.SetActive(false);
             _resultPanel.SetActive(true);
-            //set question counter to 0? 
             _questionCounter = 0;
         }
         else
         {
-            //go to next question or update field
+            //go to next question and update field
             SetCurrentQuestion();
             AudioManager.Instance.StopAudio();
             _songsList.Add(_currentQuestion.song);
             _questionPanel.SetActive(false);
-           
             _questionPanel.SetActive(true);
-            //DisableButton(false);
         }
     }
     
     public void CheckAnswer(int buttonIndex)
     {
-        if (buttonIndex != _currentQuestion.answerIndex)
+        if (GameManager.IsInputEnabled)
         {
-            //bad feedback
-            //Debug.Log("wrong");
-            AudioManager.Instance.PlayAnswerSFX(false);
-            GameManager.Instance.AddResult(_questionCounter, false);
-        }
-        else
-        {
-            //good feedback
-            //Debug.Log("correct");
-            AudioManager.Instance.PlayAnswerSFX(true);
-            GameManager.Instance.AddResult(_questionCounter, true);
+            if (buttonIndex != _currentQuestion.answerIndex)
+            {
+                //bad feedback
+                //Debug.Log("wrong");
+                _spriteButton[buttonIndex].sprite = _wrongSpriteButton;
+                AudioManager.Instance.PlayAnswerSFX(false);
+                GameManager.Instance.AddResult(_questionCounter, false);
+            }
+            else
+            {
+                //good feedback
+                //Debug.Log("correct");
+                _spriteButton[buttonIndex].sprite =_correctSpriteButton ;
+                AudioManager.Instance.PlayAnswerSFX(true);
+                GameManager.Instance.AddResult(_questionCounter, true);
+            }
+            GameManager.IsInputEnabled = false;
         }
     }
 
@@ -101,31 +115,14 @@ public class UIManager : MonoSingleton<UIManager>
         return _songsList;
     }
 
-    // public void DisableButton(bool activate)
-    // {
-    //     for (int i = 0; i < _questionButton.Length; i++)
-    //     {
-    //         _questionButton[i].enabled = false;
-    //     }
-    //   
-    //     // if (activate)
-    //     // {
-    //     //     Debug.Log("disable button");
-    //     //     foreach (Button nButton in _questionButton)
-    //     //     {
-    //     //         nButton.enabled = false;
-    //     //     }
-    //     // }
-    //     // else
-    //     // {
-    //     //     Debug.Log("enable button");
-    //     //     foreach (Button nButton in _questionButton)
-    //     //     {
-    //     //         nButton.enabled = true;
-    //     //     }
-    //     // }
-    // }
-
+    private void SetBaseSpriteButton()
+    {
+        foreach (var n in _spriteButton)
+        {
+            n.sprite = _baseSpriteButton;
+        }
+    }
+    
     public void RestartGame()
     {
         _songsList.Clear();
@@ -133,5 +130,5 @@ public class UIManager : MonoSingleton<UIManager>
         _resultPanel.SetActive(false);
         _welcomePanel.SetActive(true);
     }
-
+    
 }
